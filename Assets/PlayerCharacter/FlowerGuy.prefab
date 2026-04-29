@@ -318,6 +318,7 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
+  logic: {fileID: 0}
   stateCheckInterval: 0.3
   isGrounded: 0
   isOnWall: 0

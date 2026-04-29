@@ -4,10 +4,11 @@ using UnityEngine;
 public class Logic : MonoBehaviour
 {
 
-    public Vector2 lastCheckpoint = Vector3.zero;
+    public Vector2 lastCheckpoint = Vector2.zero;
     public GameObject player;
-    public Object activePlayer = null;
+    public GameObject activePlayer = null;
 
+    public CheckPointManagement checkPointMng;
     void Awake()
     {
         RespawnLastCheckPoint();
@@ -25,5 +26,16 @@ public class Logic : MonoBehaviour
     public void SetCheckPoint(Vector2 newCheckPoint)
     {
         lastCheckpoint = newCheckPoint;
+    }
+
+    [ContextMenu("Debug on")]
+    public void TurnOnDebugMode()
+    {
+        checkPointMng.TurnOnDebugMode();
+    }
+    [ContextMenu("Debug off")]
+    public void TurnOffDebugMode()
+    {
+       checkPointMng.TurnOffDebugMode();
     }
 }

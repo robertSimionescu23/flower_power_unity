@@ -55,12 +55,13 @@ public class PlayerCharacter : MonoBehaviour
 
     public void Start()
     {
+        rb.linearVelocity = Vector2.zero;
+        StopAllCoroutines();
+
         currNumOfJumps   = defNumOfJumps;
         currNumOfDashes  = defNumOfDashes;
         logic            = GameObject.FindGameObjectWithTag("Logic").GetComponent<Logic>();
-    }
 
-    public void Awake(){
         StartCoroutine(CheckGroundedRoutine());
         StartCoroutine(CheckIsOnWallRoutine());
     }
@@ -214,8 +215,8 @@ public class PlayerCharacter : MonoBehaviour
         if(checkOnWall){
             isCheckingOnWall = true;
             Vector2 smallerBox = new Vector2(GetComponent<Collider2D>().bounds.size[0], GetComponent<Collider2D>().bounds.size[1] * 0.2f); // Avoid clinging to walls with extremities
-            RaycastHit2D checkOnWallRight = Physics2D.BoxCast(GetComponent<Collider2D>().bounds.center, smallerBox, 0, Vector2.right, 0.01f, GroundLayer);
-            RaycastHit2D checkOnWallLeft  = Physics2D.BoxCast(GetComponent<Collider2D>().bounds.center, smallerBox, 0, Vector2.left, 0.01f, GroundLayer);
+            RaycastHit2D checkOnWallRight = Physics2D.BoxCast(GetComponent<Collider2D>().bounds.center, smallerBox, 0, Vector2.right, 0.05f, GroundLayer);
+            RaycastHit2D checkOnWallLeft  = Physics2D.BoxCast(GetComponent<Collider2D>().bounds.center, smallerBox, 0, Vector2.left, 0.05f, GroundLayer);
             isOnWallRight = checkOnWallRight  & !isGrounded;
             isOnWallLeft  = checkOnWallLeft   & !isGrounded;
             isOnWall = (isOnWallRight & (moveDirection == 1)) || (isOnWallLeft & (moveDirection == -1));
@@ -237,14 +238,18 @@ public class PlayerCharacter : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Damage")
+        if (collision.gameObject.CompareTag("Damage"))
         {
-            print("Damage");
+           logic.RespawnLastCheckPoint();
         }
     }
 
      private void OnTriggerEnter2D(Collider2D collision) {
-        print("Spawn changed");
-        logic.SetCheckPoint(collision.transform.position);
+        if (collision.gameObject.CompareTag("Checkpoint"))
+        {
+            if ((Vector3)logic.lastCheckpoint != collision.transform.position)
+                print("Spawn changed " + collision.transform.position);
+                logic.SetCheckPoint(collision.transform.position);
+        }
     }
 }
