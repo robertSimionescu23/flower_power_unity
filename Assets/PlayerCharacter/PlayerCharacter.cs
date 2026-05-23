@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
-using NUnit.Framework;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,7 +9,6 @@ using UnityEngine.Rendering;
 public class PlayerCharacter : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField]private Collider2D mainCollider;
     [SerializeField] private InputActionReference move;
     [SerializeField] private LayerMask GroundLayer;
     [SerializeField] private Logic logic;
@@ -20,59 +17,65 @@ public class PlayerCharacter : MonoBehaviour
     public float stateCheckInterval = 0.2f;
 
     public bool isGrounded          = true;
-    public bool isOnWall            = false;
-    public bool isOnWallLeft        = false;
-    public bool isOnWallRight       = false;
-    public bool isCheckingOnWall    = true;
-    public bool isFacingRight       = true;
-    public bool isCheckingGrounded  = true;
-    public bool isJumping;
+    public bool isWallSliding       = false;
+    private bool isFacingRight       = true;
     public bool isDashing;
-    public bool checkOnWall         = true;
-
-    public bool canMove = true;
-    public bool canJump = true;
-    public bool canDash = true;
+    public float wallSlidingSpeed = 2f;
+    public float gravityScale = 3f;
 
 
-    public float moveDirection;
+    private float moveDirection;
     public float moveSpeed      = 5f;
     public float jumpStrength   = 10f;
-    public int defNumOfJumps     = 2;
-    public int currNumOfJumps;
+    public int maxJumps     = 3;
+    private int currNumJumps;
     public float dashStrength   = 12f;
-    public int defNumOfDashes   = 1;
-    public int currNumOfDashes;
-    public float dashDuration   = 0.1f;
+    public float dashDuration   = 0.3f;
+    private float currDashDuration = 0.1f;
+    private float currDashCooldown   = 0f;
     public float dashCooldown   = 0.5f;
-    public float onWallGravity  = 1;
-    public float defaultGravity = 3;
+    private float dashDirection = 1;
+    public bool dashIsOnCooldown = false;
+
+    public float wallJumpDuration = 0.1f;
+    private float currWallJumpDuration = 0.1f;
+    public bool  isWallJumping     =false;
+    private float wallJumpDirection = 1;
+    public Vector2 wallJumpStrength = new(5f, 5f);
 
 
-
-
+    public Transform wallCheck;
+    public Transform groundCheck;
 
 
     public void Start()
     {
-        rb.linearVelocity = Vector2.zero;
-        StopAllCoroutines();
-
-        currNumOfJumps   = defNumOfJumps;
-        currNumOfDashes  = defNumOfDashes;
         logic            = GameObject.FindGameObjectWithTag("Logic").GetComponent<Logic>();
-
-        StartCoroutine(CheckGroundedRoutine());
-        StartCoroutine(CheckIsOnWallRoutine());
+        rb.linearVelocity = Vector2.zero;
+        rb.gravityScale = gravityScale;
     }
 
-    public void FixedUpdate()
+    public void Update()
     {
-        if(canMove){
-            moveDirection = move.action.ReadValue<float>();
-            rb.linearVelocity = new Vector2(moveDirection * moveSpeed, rb.linearVelocityY);
-        }
+        isGrounded    = CheckGrounded();
+        isWallSliding = CheckOnWall();
 
+        Move();
+        WallSlide();
+        WallJump();
+        DashUpdate();
+    }
+
+    public void Move()
+    {
+        FlipHorizontal();
+        moveDirection = move.action.ReadValue<float>();
+        if(!isWallJumping && !isDashing)
+            rb.linearVelocity = new Vector2(moveDirection * moveSpeed, rb.linearVelocityY);
+    }
+
+    private void FlipHorizontal()
+    {
         if (rb.linearVelocityX > 0.01f)
         {
             transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -83,158 +86,102 @@ public class PlayerCharacter : MonoBehaviour
             transform.localRotation = Quaternion.Euler(0, 180, 0);
             isFacingRight = false;
         }
+    }
 
-        if (isOnWall)
+    private bool CheckGrounded()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, GroundLayer);
+    }
+    private bool CheckOnWall()
+    {
+        return !isGrounded && Physics2D.OverlapCircle(wallCheck.position, 0.2f, GroundLayer);
+    }
+
+    private void WallSlide()
+    {
+        if(isWallSliding && !isGrounded)
         {
-            rb.gravityScale = onWallGravity;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
+    }
+
+    private void WallJump()
+    {
+        if((currWallJumpDuration > 0f) && isWallJumping)
+        {
+            rb.linearVelocity = new Vector2(wallJumpDirection * wallJumpStrength.x, wallJumpStrength.y);
+            currWallJumpDuration -= Time.deltaTime;
         }
         else
         {
-            rb.gravityScale = defaultGravity;
+            isWallJumping = false;
+            currWallJumpDuration = wallJumpDuration;
+        }
+    }
+
+    private void DashUpdate()
+    {
+        if((currDashDuration > 0f) && isDashing && !dashIsOnCooldown)
+        {
+            rb.linearVelocity  = new Vector2(dashDirection * dashStrength, rb.linearVelocityY);
+            currDashDuration  -= Time.deltaTime;
+            currDashCooldown   = dashCooldown;
+            dashIsOnCooldown   = true;
+            rb.gravityScale    = 0;
+        }
+        else
+        {
+            currDashDuration = dashDuration;
+            rb.gravityScale = gravityScale;
+            isDashing = false;
         }
 
-        if(rb.linearVelocityY != 0) isJumping = true;
-
-
-        if (!isCheckingGrounded) StartCoroutine(CheckGroundedRoutine());
-        if (!isCheckingOnWall) StartCoroutine(CheckIsOnWallRoutine());
+        if((currDashCooldown > 0f) && dashIsOnCooldown && !isDashing)
+        {
+            currDashCooldown -= Time.deltaTime;
+        }
+        else
+        {
+            dashIsOnCooldown = false;
+        }
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && canJump)
+        if(isGrounded && !context.performed)
+            currNumJumps = maxJumps;
+
+        if (context.performed)
         {
-            if (currNumOfJumps > 0)
+            if ((isGrounded || (currNumJumps > 0)) && !isWallSliding)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpStrength);
-                currNumOfJumps --;
+                currNumJumps --;
+            }
+            if(!isGrounded && isWallSliding)
+            {
+                isWallSliding = false;
+                isWallJumping = true ;
+                wallJumpDirection = isFacingRight?-1:1;
             }
         }
-        else if(context.performed && isOnWall)
-        {
-            isOnWall = false;
-            StartCoroutine(WallJumpRoutine());
-        }
 
-        if (context.canceled && !isOnWall)
+        //Enable shorter jumps
+        if (context.canceled && !isWallSliding)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);
         }
     }
-    //TODO: Make a wall collision stop the dash
+
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && canDash)
+        if (context.performed)
         {
-           StartCoroutine(DashRoutine());
-        }
-    }
-
-    IEnumerator DashRoutine()
-    {
-        if (currNumOfDashes > 0)
-        {
-            // Program dashes from netural position
-            if(moveDirection == 0 && canDash){
-                if(isFacingRight)
-                    moveDirection = 1;
-                else
-                    moveDirection = -1;
-            }
-
-            float originalGravity = rb.gravityScale;
-
             isDashing = true;
-            canDash   = false;
-            canMove   = false;
-            canJump   = false;
-
-            rb.gravityScale = 0f;
-
-            if(!isGrounded) currNumOfDashes --;
-
-            print("isDashing");
-
-            rb.linearVelocity = new Vector2(dashStrength * moveDirection, 0);
-            yield return new WaitForSeconds(dashDuration);
-
-            isDashing = false;
-            canMove   = true;
-            canJump   = true;
-
-            rb.gravityScale = originalGravity;
-
-            yield return new WaitForSeconds(dashCooldown);
-
-            canDash   = true;
+            dashDirection = isFacingRight? 1: -1;
         }
     }
 
-    IEnumerator WallJumpRoutine()
-    {
-        canDash   = false;
-        canMove   = false;
-        canJump   = false;
-        isOnWall  = false;
-
-        print("isWallJumping");
-        rb.gravityScale = 0;
-        if(isOnWallLeft) rb.linearVelocity = new Vector2(jumpStrength * 0.707f, jumpStrength * 0.707f);
-        if(isOnWallRight) rb.linearVelocity = new Vector2(-jumpStrength * 0.707f, jumpStrength * 0.707f);
-        checkOnWall = false;
-
-        yield return new WaitForSeconds(dashDuration);
-
-        canDash   = true;
-        canMove   = true;
-        canJump   = true;
-        rb.gravityScale = defaultGravity;
-
-
-        yield return new WaitForSeconds(dashCooldown);
-        checkOnWall = true;
-    }
-
-    IEnumerator CheckGroundedRoutine()
-    {
-        isCheckingGrounded = true;
-        RaycastHit2D boxcast = Physics2D.BoxCast(GetComponent<Collider2D>().bounds.center, GetComponent<Collider2D>().bounds.size, 0, Vector2.down, 0.1f, GroundLayer);
-        isGrounded = boxcast;
-
-        if(isGrounded){
-            isJumping = false;
-            currNumOfJumps = defNumOfJumps;
-            currNumOfDashes = defNumOfDashes;
-        }
-        yield return new WaitForSeconds(stateCheckInterval);
-        isCheckingGrounded = false;
-    }
-
-    IEnumerator CheckIsOnWallRoutine()
-    {
-        if(checkOnWall){
-            isCheckingOnWall = true;
-            Vector2 smallerBox = new Vector2(GetComponent<Collider2D>().bounds.size[0], GetComponent<Collider2D>().bounds.size[1] * 0.2f); // Avoid clinging to walls with extremities
-            RaycastHit2D checkOnWallRight = Physics2D.BoxCast(GetComponent<Collider2D>().bounds.center, smallerBox, 0, Vector2.right, 0.05f, GroundLayer);
-            RaycastHit2D checkOnWallLeft  = Physics2D.BoxCast(GetComponent<Collider2D>().bounds.center, smallerBox, 0, Vector2.left, 0.05f, GroundLayer);
-            isOnWallRight = checkOnWallRight  & !isGrounded;
-            isOnWallLeft  = checkOnWallLeft   & !isGrounded;
-            isOnWall = (isOnWallRight & (moveDirection == 1)) || (isOnWallLeft & (moveDirection == -1));
-
-            canJump = isOnWall? false: true;
-            if(isJumping & isOnWall)
-            {
-                isJumping = false;
-                rb.linearVelocityY = 0;
-            }
-            yield return new WaitForSeconds(stateCheckInterval);
-            isCheckingOnWall = false;
-        }
-        else
-        {
-            isOnWall = false;
-        }
-    }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -251,5 +198,10 @@ public class PlayerCharacter : MonoBehaviour
                 print("Spawn changed " + collision.transform.position);
                 logic.SetCheckPoint(collision.transform.position);
         }
+    }
+    [ContextMenu("respawn")]
+    public void RespawnLastCheckPoint()
+    {
+        logic.RespawnLastCheckPoint();
     }
 }

@@ -20,6 +20,7 @@ public class Logic : MonoBehaviour
         if(activePlayer!= null)
             Destroy(activePlayer);
         activePlayer = Instantiate(player, lastCheckpoint, Quaternion.identity);
+        // activePlayer.GetComponent<PlayerCharacter>().InitPlayer();
     }
 
 
