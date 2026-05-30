@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Damage
   - Logic
+  - NextRoom
   layers:
   - Default
   - TransparentFX

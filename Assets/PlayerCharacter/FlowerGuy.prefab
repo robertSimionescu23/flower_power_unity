@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 5345390785410029}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.193, y: 0.326, z: 0}
+  m_LocalPosition: {x: 0.193, y: 0.077, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -141,7 +141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   rb: {fileID: 6215281057111217530}
-  mainCollider: {fileID: 4197415275001376819}
   move: {fileID: 3522103134607871803, guid: c157549a81d218c4c87b4ca15c018de4, type: 3}
   GroundLayer:
     serializedVersion: 2
@@ -149,25 +148,20 @@ MonoBehaviour:
   logic: {fileID: 0}
   stateCheckInterval: 0.3
   isGrounded: 0
-  isOnWall: 0
-  isFacingRight: 1
-  isJumping: 0
+  isWallSliding: 0
   isDashing: 0
-  canMove: 1
-  canJump: 1
-  canDash: 1
-  moveDirection: 0
+  wallSlidingSpeed: 2
+  gravityScale: 3
   moveSpeed: 5
   jumpStrength: 10
-  defNumOfJumps: 2
-  currNumOfJumps: 0
+  maxJumps: 3
   dashStrength: 20
-  defNumOfDashes: 1
-  currNumOfDashes: 0
   dashDuration: 0.1
   dashCooldown: 0.5
-  onWallGravity: 1
-  defaultGravity: 3
+  dashIsOnCooldown: 0
+  wallJumpDuration: 0.1
+  isWallJumping: 0
+  wallJumpStrength: {x: 5, y: 5}
   wallCheck: {fileID: 1250157001580156626}
   groundCheck: {fileID: 1000311737861508021}
 --- !u!114 &3252268591366321116

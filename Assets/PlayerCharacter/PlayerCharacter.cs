@@ -198,7 +198,14 @@ public class PlayerCharacter : MonoBehaviour
                 print("Spawn changed " + collision.transform.position);
                 logic.SetCheckPoint(collision.transform.position);
         }
+
+        if (collision.gameObject.CompareTag("NextRoom"))
+        {
+            logic.ChangeRoom(collision.GetComponent<NextRoomDoor>().nextRoom);
+        }
     }
+
+
     [ContextMenu("respawn")]
     public void RespawnLastCheckPoint()
     {
