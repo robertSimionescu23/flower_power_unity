@@ -50,6 +50,7 @@ public class Logic : MonoBehaviour
         followPlayer cameraScript = gameCamera.GetComponent<followPlayer>();
         GameObject groundObject = GameObject.FindGameObjectWithTag("Ground");
         Tilemap tileMap = groundObject.GetComponent<Tilemap>();
+
         tileMap.CompressBounds();
         Bounds levelBounds = tileMap.localBounds;
 
@@ -61,7 +62,7 @@ public class Logic : MonoBehaviour
         cameraScript.player       = activePlayer;
         cameraScript.room         = activeRoom;
         cameraScript.levelBounds  = levelBounds;
-        cameraScript.calculateCameraBounds();
+        cameraScript.CalculateCameraBounds();
     }
 
 
