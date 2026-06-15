@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Logic : MonoBehaviour
 {
@@ -10,9 +11,10 @@ public class Logic : MonoBehaviour
     public GameObject player;
     public GameObject activePlayer = null;
     public GameObject activeRoom   = null;
+    public GameObject gameCamera;
 
     public CheckPointManagement checkPointMng;
-    void Awake()
+    void Start()
     {
         RespawnLastCheckPoint();
     }
@@ -23,7 +25,7 @@ public class Logic : MonoBehaviour
         if(activePlayer!= null)
             Destroy(activePlayer);
         activePlayer = Instantiate(player, lastCheckpoint, Quaternion.identity);
-        // activePlayer.GetComponent<PlayerCharacter>().InitPlayer();
+        UpdateCameraFocus();
     }
 
 
@@ -42,6 +44,26 @@ public class Logic : MonoBehaviour
     {
        checkPointMng.TurnOffDebugMode();
     }
+    [ContextMenu("Update Camera Focus")]
+    public void UpdateCameraFocus()
+    {
+        followPlayer cameraScript = gameCamera.GetComponent<followPlayer>();
+        GameObject groundObject = GameObject.FindGameObjectWithTag("Ground");
+        Tilemap tileMap = groundObject.GetComponent<Tilemap>();
+        tileMap.CompressBounds();
+        Bounds levelBounds = tileMap.localBounds;
+
+        levelBounds.SetMinMax(
+            tileMap.transform.TransformPoint(tileMap.localBounds.min),
+            tileMap.transform.TransformPoint(tileMap.localBounds.max)
+        );
+
+        cameraScript.player       = activePlayer;
+        cameraScript.room         = activeRoom;
+        cameraScript.levelBounds  = levelBounds;
+        cameraScript.calculateCameraBounds();
+    }
+
 
     public void ChangeRoom(GameObject nextRoom)
     {

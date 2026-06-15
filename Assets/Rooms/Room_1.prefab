@@ -119,7 +119,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1560,13 +1560,16 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 128
+  - serializedVersion: 2
+    m_RefCount: 128
     m_Data: {fileID: 11400000, guid: 2a947a1c227d2dd48b451533d732836e, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 128
+  - serializedVersion: 2
+    m_RefCount: 128
     m_Data: {fileID: 7482667652216324306, guid: f5c2ffcadb4448f4290ea80e277fba91, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 128
+  - serializedVersion: 2
+    m_RefCount: 128
     m_Data:
       e00: 1
       e01: 0
@@ -1585,7 +1588,8 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 128
+  - serializedVersion: 2
+    m_RefCount: 128
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -2000,13 +2004,16 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 9
+  - serializedVersion: 2
+    m_RefCount: 9
     m_Data: {fileID: 11400000, guid: 769dd4064fd64ad4b85be835fb1d5594, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 9
+  - serializedVersion: 2
+    m_RefCount: 9
     m_Data: {fileID: 7482667652216324306, guid: f5c2ffcadb4448f4290ea80e277fba91, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 9
+  - serializedVersion: 2
+    m_RefCount: 9
     m_Data:
       e00: 1
       e01: 0
@@ -2025,7 +2032,8 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 9
+  - serializedVersion: 2
+    m_RefCount: 9
     m_Data: {r: 0.5377358, g: 0, b: 0, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
