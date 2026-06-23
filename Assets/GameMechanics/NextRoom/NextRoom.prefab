@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1727022464402032894}
   - component: {fileID: 4441045936352052335}
-  - component: {fileID: 1896390329532958167}
+  - component: {fileID: 123970455827922129}
   m_Layer: 0
   m_Name: NextRoom
   m_TagString: NextRoom
@@ -79,7 +79,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 3.2328491}
   m_EdgeRadius: 0
---- !u!114 &1896390329532958167
+--- !u!114 &123970455827922129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,8 +88,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2840918146706672471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ad528939e84a4d448fa7fd610ed3f56, type: 3}
+  m_Script: {fileID: 11500000, guid: ec47bfc725070ea44969b7d5b007f848, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NextRoom
-  nextRoomNumber: 1
+  m_EditorClassIdentifier: Assembly-CSharp::NextRoomDoor
+  leadingRoomNum: 0
   nextRoom: {fileID: 0}

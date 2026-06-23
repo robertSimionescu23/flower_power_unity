@@ -187,28 +187,29 @@ public class PlayerCharacter : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Damage"))
         {
-           logic.RespawnLastCheckPoint();
+           logic.RespawnCurrCheckpoint();
         }
     }
 
      private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Checkpoint"))
         {
-            if ((Vector3)logic.lastCheckpoint != collision.transform.position)
+            if ((Vector3)logic.currCheckpoint != collision.transform.position)
                 print("Spawn changed " + collision.transform.position);
                 logic.SetCheckPoint(collision.transform.position);
         }
 
         if (collision.gameObject.CompareTag("NextRoom"))
         {
-            logic.ChangeRoom(collision.GetComponent<NextRoomDoor>().nextRoom);
+            NextRoomDoor door = collision.GetComponent<NextRoomDoor>();
+            logic.ChangeRoom(door.destinationRoom, door);
         }
     }
 
 
     [ContextMenu("respawn")]
-    public void RespawnLastCheckPoint()
+    public void RespawnCurrCheckpoint()
     {
-        logic.RespawnLastCheckPoint();
+        logic.RespawnCurrCheckpoint();
     }
 }

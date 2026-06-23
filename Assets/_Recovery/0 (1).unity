@@ -281,7 +281,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &265323615 stripped
+--- !u!1 &208843532 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1672207112963412537, guid: 6d6e02cda6a6cdc4e9de164d43db971c, type: 3}
   m_PrefabInstance: {fileID: 2109178614}
@@ -315,11 +315,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ead9206d7f0c546a6a42c96394be7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Logic
-  currCheckpoint: {x: 0, y: 0}
+  lastCheckpoint: {x: -3.36, y: -6.42}
   player: {fileID: 5824575681974245606, guid: 394e89188aeba2b43a3c90f186699c2f, type: 3}
   activePlayer: {fileID: 0}
-  activeRoom: {fileID: 265323615}
+  activeRoom: {fileID: 208843532}
   gameCamera: {fileID: 85131288}
+  doorsSystem: {fileID: 0}
   checkPointMng: {fileID: 0}
 --- !u!4 &390032118
 Transform:
@@ -347,26 +348,6 @@ PrefabInstance:
     - target: {fileID: 1672207112963412537, guid: 6d6e02cda6a6cdc4e9de164d43db971c, type: 3}
       propertyPath: m_Name
       value: Room_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2195783376278067349, guid: 6d6e02cda6a6cdc4e9de164d43db971c, type: 3}
-      propertyPath: sourceRoom
-      value: 
-      objectReference: {fileID: 1672207112963412537, guid: 360fef3b7ede4134c910f5b3d00bf8be, type: 3}
-    - target: {fileID: 2195783376278067349, guid: 6d6e02cda6a6cdc4e9de164d43db971c, type: 3}
-      propertyPath: destinationRoom
-      value: 
-      objectReference: {fileID: 1672207112963412537, guid: 360fef3b7ede4134c910f5b3d00bf8be, type: 3}
-    - target: {fileID: 4565331403381066268, guid: 6d6e02cda6a6cdc4e9de164d43db971c, type: 3}
-      propertyPath: sourceRoom
-      value: 
-      objectReference: {fileID: 1672207112963412537, guid: a51292e8f7ec2064482af887ed4995fb, type: 3}
-    - target: {fileID: 4565331403381066268, guid: 6d6e02cda6a6cdc4e9de164d43db971c, type: 3}
-      propertyPath: destinationRoom
-      value: 
-      objectReference: {fileID: 1672207112963412537, guid: a51292e8f7ec2064482af887ed4995fb, type: 3}
-    - target: {fileID: 4565331403381066268, guid: 6d6e02cda6a6cdc4e9de164d43db971c, type: 3}
-      propertyPath: doors.Array.size
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6151263503496767455, guid: 6d6e02cda6a6cdc4e9de164d43db971c, type: 3}
       propertyPath: m_LocalPosition.x
