@@ -3608,6 +3608,10 @@ PrefabInstance:
       propertyPath: leadingRoomNum
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 123970455827922129, guid: 5adccde59ec41b146b15639fc2121437, type: 3}
+      propertyPath: destinationRoom
+      value: 
+      objectReference: {fileID: 1672207112963412537, guid: 360fef3b7ede4134c910f5b3d00bf8be, type: 3}
     - target: {fileID: 1727022464402032894, guid: 5adccde59ec41b146b15639fc2121437, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.36

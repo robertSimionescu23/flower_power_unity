@@ -80,15 +80,14 @@ public class Logic : MonoBehaviour
         return null;
     }
 
-
     public void ChangeRoom(GameObject nextRoom, NextRoomDoor sourceDoor)
     {
         Destroy(activeRoom);
         activeRoom = Instantiate(nextRoom, Vector3.zero, Quaternion.identity);
+        UpdateCameraFocus();
         NextRoomDoor destDoor = getRightDestinationDoor(sourceDoor);
-        if(destDoor == null)
-            Debug.LogError("Destination door not found");
-        else
+
+        if(destDoor)
         {
             currCheckpoint = destDoor.checkPoint.transform.position;
             RespawnCurrCheckpoint();
