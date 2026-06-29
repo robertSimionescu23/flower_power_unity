@@ -15,6 +15,7 @@ public class followPlayer : MonoBehaviour
     private Camera     cameraObject;
     [SerializeField]private Vector2 cameraSize;
     [SerializeField]private Bounds cameraBounds;
+    public Tilemap groundTilemap;
 
     void Awake()
     {
@@ -29,6 +30,8 @@ public class followPlayer : MonoBehaviour
 
     public void CalculateCameraBounds()
     {
+        //Start camera at 0
+        cameraObject.transform.position = new Vector3(0, 0, cameraObject.transform.position.z);
         float newXMin = levelBounds.min.x + cameraSize.x;
         float newYMin = levelBounds.min.y + cameraSize.y;
         float newXMax = levelBounds.max.x - cameraSize.x;

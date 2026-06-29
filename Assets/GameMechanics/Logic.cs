@@ -47,22 +47,32 @@ public class Logic : MonoBehaviour
     [ContextMenu("Update Camera Focus")]
     public void UpdateCameraFocus()
     {
-        followPlayer cameraScript = gameCamera.GetComponent<followPlayer>();
-        GameObject groundObject = GameObject.FindGameObjectWithTag("Ground");
-        Tilemap tileMap = groundObject.GetComponent<Tilemap>();
+        followPlayer cameraScript = gameCamera  .GetComponent<followPlayer>();
+        Tilemap[] tilemaps =  activeRoom.transform.GetComponentsInChildren<Tilemap>();
+        Tilemap  groundTileMap = null;
 
-        tileMap.CompressBounds();
-        Bounds levelBounds = tileMap.localBounds;
+        foreach (Tilemap tilemap in tilemaps){
+            if(tilemap.CompareTag("Ground"))
+                groundTileMap = tilemap;
+        }
 
-        levelBounds.SetMinMax(
-            tileMap.transform.TransformPoint(tileMap.localBounds.min),
-            tileMap.transform.TransformPoint(tileMap.localBounds.max)
-        );
+        if(!groundTileMap)
+            Debug.LogError("There was no Ground Tilemap found");
+        else{
+            groundTileMap.CompressBounds();
+            Bounds levelBounds = groundTileMap.localBounds;
 
-        cameraScript.player       = activePlayer;
-        cameraScript.room         = activeRoom;
-        cameraScript.levelBounds  = levelBounds;
-        cameraScript.CalculateCameraBounds();
+            levelBounds.SetMinMax(
+                groundTileMap.transform.TransformPoint(groundTileMap.localBounds.min),
+                groundTileMap.transform.TransformPoint(groundTileMap.localBounds.max)
+            );
+
+            cameraScript.player        = activePlayer;
+            cameraScript.room          = activeRoom;
+            cameraScript.groundTilemap = groundTileMap;
+            cameraScript.levelBounds   = levelBounds;
+            cameraScript.CalculateCameraBounds();
+        }
     }
 
     public NextRoomDoor getRightDestinationDoor(NextRoomDoor sourceDoor)

@@ -163,6 +163,7 @@ MonoBehaviour:
   cameraBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
+  groundTilemap: {fileID: 0}
 --- !u!114 &85131290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,6 +408,10 @@ PrefabInstance:
     - target: {fileID: 6151263503496767455, guid: 6d6e02cda6a6cdc4e9de164d43db971c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6806363881800444611, guid: 6d6e02cda6a6cdc4e9de164d43db971c, type: 3}
+      propertyPath: m_GeometryType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
