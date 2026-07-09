@@ -6,11 +6,11 @@ using UnityEngine.Tilemaps;
 public class followPlayer : MonoBehaviour
 {
 
-    public GameObject player;
-    public GameObject room;
-    public Bounds     levelBounds;
-    public float       cameraSpeed = 3f;
-    public float       cameraOffset = 5f;
+    public GameObject  player;
+    public GameObject  room;
+    public Bounds      levelBounds;
+    public float       cameraSpeed = 1.5f;
+    public float       cameraOffset = 4f;
     public float       currOffset   = 0f;
     private Camera     cameraObject;
     [SerializeField]private Vector2 cameraSize;

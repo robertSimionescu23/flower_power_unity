@@ -12,10 +12,6 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private InputActionReference move;
     [SerializeField] private LayerMask GroundLayer;
     [SerializeField] private Logic logic;
-
-    // Do not check if grounded while the character is in the "stateCheckInterval" of the jump (leaving the ground but the raycast can still hit the gorund)
-    public float stateCheckInterval = 0.2f;
-
     public bool isGrounded          = true;
     public bool isWallSliding       = false;
     private bool isFacingRight       = true;
@@ -90,11 +86,11 @@ public class PlayerCharacter : MonoBehaviour
 
     private bool CheckGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, GroundLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.05f, GroundLayer);
     }
     private bool CheckOnWall()
     {
-        return !isGrounded && Physics2D.OverlapCircle(wallCheck.position, 0.2f, GroundLayer);
+        return !isGrounded && Physics2D.OverlapCircle(wallCheck.position, 0.05f, GroundLayer);
     }
 
     private void WallSlide()
