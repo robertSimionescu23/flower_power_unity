@@ -146,7 +146,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   logic: {fileID: 0}
-  stateCheckInterval: 0.3
   isGrounded: 0
   isWallSliding: 0
   isDashing: 0
@@ -248,8 +247,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 3
+  m_AngularDamping: 0
+  m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 058d444665fbaa149b257c19cc3150bc, type: 2}
   m_IncludeLayers:
     serializedVersion: 2

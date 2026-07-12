@@ -1,4 +1,5 @@
 using System;
+using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -10,12 +11,19 @@ public class followPlayer : MonoBehaviour
     public GameObject  room;
     public Bounds      levelBounds;
     public float       cameraSpeed = 1.5f;
-    public float       cameraOffset = 4f;
+    public float       cameraOffsetX = 4f;
+    public float       cameraOffsetY = 2f;
     public float       currOffset   = 0f;
     private Camera     cameraObject;
     [SerializeField]private Vector2 cameraSize;
     [SerializeField]private Bounds cameraBounds;
     public Tilemap groundTilemap;
+
+    public bool isMoving = false;
+    public Vector3 targetPos;
+    public float distanceX;
+    public float distanceY;
+    public Vector3 playerPos;
 
     void Awake()
     {
@@ -25,7 +33,7 @@ public class followPlayer : MonoBehaviour
             x = cameraObject.orthographicSize * cameraObject.aspect,
             y = cameraObject.orthographicSize
         };
-        cameraOffset = cameraSize.x;
+        cameraOffsetX = cameraSize.x;
     }
 
     public void CalculateCameraBounds()
@@ -46,10 +54,26 @@ public class followPlayer : MonoBehaviour
 
     private Vector3 GetCameraPosition(Vector3 currentPos)
     {
-        if(player.GetComponent<Rigidbody2D>().linearVelocityX > 0)
-            currentPos.x += cameraOffset;
-        if(player.GetComponent<Rigidbody2D>().linearVelocityX < 0)
-            currentPos.x -= cameraOffset;
+        bool isWallsliding = player.GetComponent<PlayerCharacter>().isWallSliding;
+        bool isWallJumping = player.GetComponent<PlayerCharacter>().isWallJumping;
+        if(isMoving){
+            if(player.GetComponent<Rigidbody2D>().linearVelocityX > 0 && isWallsliding && !isWallsliding)
+                currentPos.x += cameraOffsetX;
+            else if(player.GetComponent<Rigidbody2D>().linearVelocityX < 0 && isWallsliding && !isWallsliding)
+                currentPos.x -= cameraOffsetX;
+            else
+            currentPos.x = player.transform.position.x;
+
+            if(player.GetComponent<Rigidbody2D>().linearVelocityY > 1f)
+                currentPos.y += cameraOffsetY;
+            else if(player.GetComponent<Rigidbody2D>().linearVelocityY < 1f && isWallsliding && !isWallsliding)
+                currentPos.y -= cameraOffsetY;
+            else if(player.GetComponent<Rigidbody2D>().linearVelocityY == 0)
+                currentPos.y = player.transform.position.y;
+
+            if(isWallJumping || isWallsliding)
+                currentPos.y += cameraOffsetY;
+        }
 
         Vector3 newPos = new()
         {
@@ -69,12 +93,43 @@ public class followPlayer : MonoBehaviour
         return newPos;
     }
 
+    public void SetIsMoving(Vector3 currentPos)
+    {
+        //TODO: Make values 2f etc variables for ease of config
+        if (isMoving)
+        {
+            if(
+                Math.Abs(targetPos.x - currentPos.x) < 0.1f &&
+                Math.Abs(targetPos.y - currentPos.y) < 0.1f
+            ){
+                isMoving = false;
+            }
+        }
+        else
+        {
+            if(
+                Math.Abs(targetPos.x - currentPos.x) > 2.5f ||
+                Math.Abs(targetPos.y - currentPos.y) > 1f
+            ){
+                isMoving = true;
+            }
+        }
+    }
+
+    //TODO: Implement a system that only allows camera movement if the distance between last movement and current position is bigger tha a set value
+
 
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position,
-                                         GetCameraPosition(player.transform.position),
-                                         cameraSpeed * Time.deltaTime);
+        targetPos = GetCameraPosition(player.transform.position);
+        SetIsMoving(transform.position);
+        distanceX = Math.Abs(targetPos.x - transform.position.x);
+        distanceY = Math.Abs(targetPos.y - transform.position.y);
+        playerPos = player.transform.position;
+        if(isMoving)
+            transform.position = Vector3.Lerp(transform.position,
+                                              targetPos,
+                                              cameraSpeed * Time.deltaTime);
     }
 }

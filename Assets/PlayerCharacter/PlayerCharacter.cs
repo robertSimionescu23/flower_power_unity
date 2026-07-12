@@ -17,7 +17,7 @@ public class PlayerCharacter : MonoBehaviour
     private bool isFacingRight       = true;
     public bool isDashing;
     public float wallSlidingSpeed = 2f;
-    public float gravityScale = 3f;
+    public float gravityScale = 1f;
 
 
     private float moveDirection;
@@ -168,7 +168,7 @@ public class PlayerCharacter : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);
         }
     }
-
+    //TODO: Implement dash recharge on grounded
     public void Dash(InputAction.CallbackContext context)
     {
         if (context.performed)
