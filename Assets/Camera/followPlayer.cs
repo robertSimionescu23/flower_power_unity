@@ -25,6 +25,14 @@ public class followPlayer : MonoBehaviour
     public float distanceY;
     public Vector3 playerPos;
 
+    //TODO: Implement system to keep camera centered on mean of position ion last x milseconds
+
+    public float medianTimer = 0.3f;
+    public float currMedianTimer;
+    public Vector3 medianPosition;
+    public int positionsUsed;
+    private Vector3 tempMedian;
+
     void Awake()
     {
         cameraObject = gameObject.GetComponent<Camera>();
@@ -34,6 +42,10 @@ public class followPlayer : MonoBehaviour
             y = cameraObject.orthographicSize
         };
         cameraOffsetX = cameraSize.x;
+
+        currMedianTimer = medianTimer;
+        medianPosition  = playerPos;
+        positionsUsed   = 0;
     }
 
     public void CalculateCameraBounds()
@@ -52,27 +64,50 @@ public class followPlayer : MonoBehaviour
         cameraBounds.SetMinMax(cameraMinBound, cameraMaxBound);
     }
 
+    public void SetMedianPosition()
+    {
+        if(currMedianTimer > 0){
+            currMedianTimer -= Time.deltaTime;
+
+            tempMedian.x += playerPos.x;
+            tempMedian.y += playerPos.y;
+            tempMedian.z  = playerPos.z;
+
+            positionsUsed += 1;
+        }
+        else
+        {
+            medianPosition.x = (tempMedian.x / positionsUsed) + currOffset;
+            medianPosition.y = tempMedian.y / positionsUsed;
+            medianPosition.z = tempMedian.z;
+
+            //Resets
+            currMedianTimer = medianTimer;
+            tempMedian      = Vector3.zero;
+            positionsUsed   = 0;
+        }
+
+    }
+
     private Vector3 GetCameraPosition(Vector3 currentPos)
     {
         bool isWallsliding = player.GetComponent<PlayerCharacter>().isWallSliding;
         bool isWallJumping = player.GetComponent<PlayerCharacter>().isWallJumping;
+
+        Vector3 startPos = currentPos;
         if(isMoving){
-            if(player.GetComponent<Rigidbody2D>().linearVelocityX > 0 && isWallsliding && !isWallsliding)
-                currentPos.x += cameraOffsetX;
-            else if(player.GetComponent<Rigidbody2D>().linearVelocityX < 0 && isWallsliding && !isWallsliding)
-                currentPos.x -= cameraOffsetX;
-            else
-            currentPos.x = player.transform.position.x;
+            // else
+            //     currentPos.x = startPos.x;
 
-            if(player.GetComponent<Rigidbody2D>().linearVelocityY > 1f)
-                currentPos.y += cameraOffsetY;
-            else if(player.GetComponent<Rigidbody2D>().linearVelocityY < 1f && isWallsliding && !isWallsliding)
-                currentPos.y -= cameraOffsetY;
-            else if(player.GetComponent<Rigidbody2D>().linearVelocityY == 0)
-                currentPos.y = player.transform.position.y;
+            // if(player.GetComponent<Rigidbody2D>().linearVelocityY > 1f)
+            //     currentPos.y += cameraOffsetY;
+            // else if(player.GetComponent<Rigidbody2D>().linearVelocityY < 1f && isWallsliding && !isWallsliding)
+            //     currentPos.y -= cameraOffsetY;
+            // else if(player.GetComponent<Rigidbody2D>().linearVelocityY == 0)
+            //     currentPos.y = player.transform.position.y;
 
-            if(isWallJumping || isWallsliding)
-                currentPos.y += cameraOffsetY;
+            // if(isWallJumping || isWallsliding)
+            //     currentPos.y += cameraOffsetY;
         }
 
         Vector3 newPos = new()
@@ -112,6 +147,10 @@ public class followPlayer : MonoBehaviour
                 Math.Abs(targetPos.y - currentPos.y) > 1f
             ){
                 isMoving = true;
+                if(player.GetComponent<Rigidbody2D>().linearVelocityX > 0)
+                    currentPos.x += cameraOffsetX;
+                else if(player.GetComponent<Rigidbody2D>().linearVelocityX < 0)
+                    currentPos.x -= cameraOffsetX;
             }
         }
     }
@@ -122,11 +161,18 @@ public class followPlayer : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        targetPos = GetCameraPosition(player.transform.position);
-        SetIsMoving(transform.position);
+        playerPos = player.transform.position;
+
+        SetMedianPosition();
+        if(Math.Abs(player.GetComponent<Rigidbody2D>().linearVelocityY) > 2)
+            targetPos = GetCameraPosition(new Vector3(medianPosition.x, playerPos.y, playerPos.z));
+        else
+            targetPos = GetCameraPosition(medianPosition);
+
+        SetIsMoving(targetPos);
+
         distanceX = Math.Abs(targetPos.x - transform.position.x);
         distanceY = Math.Abs(targetPos.y - transform.position.y);
-        playerPos = player.transform.position;
         if(isMoving)
             transform.position = Vector3.Lerp(transform.position,
                                               targetPos,

@@ -20,7 +20,7 @@ public class PlayerCharacter : MonoBehaviour
     public float gravityScale = 1f;
 
 
-    private float moveDirection;
+    public float moveDirection;
     public float moveSpeed      = 5f;
     public float jumpStrength   = 10f;
     public int maxJumps     = 3;
