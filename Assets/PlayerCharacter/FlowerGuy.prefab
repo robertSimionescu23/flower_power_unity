@@ -151,6 +151,7 @@ MonoBehaviour:
   isDashing: 0
   wallSlidingSpeed: 2
   gravityScale: 3
+  moveDirection: 0
   moveSpeed: 5
   jumpStrength: 10
   maxJumps: 3

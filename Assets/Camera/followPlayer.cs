@@ -15,6 +15,8 @@ public class followPlayer : MonoBehaviour
     public Tilemap      groundTilemap;
     public GameObject   player;
     public Vector3      playerPos;
+    public float      playerVelocityX;
+    public float      playerVelocityY;
     public GameObject   room;
     public Bounds       levelBounds;
 
@@ -27,6 +29,12 @@ public class followPlayer : MonoBehaviour
     public Vector3 targetPos;
     public float   distanceX;
     public float   distanceY;
+    public float deadZoneHalfY = 2f;
+    public float deadZoneHalfX;
+    public float cameraSpeedUpRate = 0.1f;
+
+
+
 
     void Awake()
     {
@@ -36,6 +44,9 @@ public class followPlayer : MonoBehaviour
             x = cameraObject.orthographicSize * cameraObject.aspect,
             y = cameraObject.orthographicSize
         };
+
+        deadZoneHalfX = deadZoneHalfY * cameraObject.aspect;
+
         cameraSpeed   = defaultCameraSpeed;
     }
 
@@ -78,15 +89,14 @@ public class followPlayer : MonoBehaviour
         return newPos;
     }
 
-
     // Dead zone enforcement
-    public void SetIsMoving(float distanceX, float distanceY)
+    public void EnforceDeadZone(float distanceX, float distanceY)
     {
         if (isMoving)
         {
             if(
-                distanceX < 0.2f &&
-                distanceY < 0.2f
+                distanceX < 0.1f &&
+                distanceY < 0.1f
             ){
                 isMoving = false;
             }
@@ -94,8 +104,8 @@ public class followPlayer : MonoBehaviour
         else
         {
             if(
-                distanceX > 4f ||
-                distanceY > 2f
+                distanceX > deadZoneHalfX ||
+                distanceY > deadZoneHalfY
             ){
                 Debug.Log("IsMoving");
                 isMoving = true;
@@ -103,35 +113,44 @@ public class followPlayer : MonoBehaviour
         }
     }
 
-    //If the player is moving too fast for the camera, update it's speed
+    //If the player is moving too fast for the camera, update it's speed based on distance from camera. Take Dead Zone into consideration
     void UpdateCameraSpeedToPlayerSpeed()
     {
-        float playerSpeed = Math.Abs(player.GetComponent<Rigidbody2D>().linearVelocityY);
-        if(playerSpeed > 8f)
+        //TODO: make "5" a variable
+        if(Mathf.Abs(playerVelocityX) > 5f || Mathf.Abs(playerVelocityY) > 5f)
         {
-            if(cameraSpeed < playerSpeed)
-                cameraSpeed += defaultCameraSpeed * 10 * Time.deltaTime; //TODO: 10 is arbitrary and can be changed for a variable if needed
-            else
-                cameraSpeed = playerSpeed;
+            cameraSpeed += cameraSpeedUpRate * Time.deltaTime;
         }
         else
         {
-            cameraSpeed = defaultCameraSpeed;
+            if(cameraSpeed > defaultCameraSpeed)
+            {
+                cameraSpeed -= cameraSpeedUpRate * Time.deltaTime;
+            }
+            else
+            {
+                cameraSpeed = defaultCameraSpeed;
+            }
         }
     }
     void LateUpdate()
     {
         playerPos = player.transform.position;
+
+        //TODO: Make this cleaner
+        playerVelocityY = player.GetComponent<Rigidbody2D>().linearVelocityY;
+        playerVelocityX = player.GetComponent<Rigidbody2D>().linearVelocityX;
+
         targetPos = GetCameraPosition(playerPos);
 
         //Distances from player to camera
-        distanceX = Math.Abs(targetPos.x - transform.position.x);
-        distanceY = Math.Abs(targetPos.y - transform.position.y);
+        distanceX = Math.Abs(playerPos.x - transform.position.x);
+        distanceY = Math.Abs(playerPos.y - transform.position.y);
 
-        SetIsMoving(distanceX, distanceY);
+        EnforceDeadZone(distanceX, distanceY);
 
+        UpdateCameraSpeedToPlayerSpeed();
         if(isMoving)
-            UpdateCameraSpeedToPlayerSpeed();
             transform.position = Vector3.Lerp(transform.position,
                                               targetPos,
                                               cameraSpeed * Time.deltaTime);
