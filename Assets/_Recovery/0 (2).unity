@@ -176,17 +176,13 @@ MonoBehaviour:
     m_Extent: {x: 0, y: 0, z: 0}
   cameraSpeed: 1.5
   defaultCameraSpeed: 1.5
-  maxCameraSpeed: 20
-  cameraSpeedUpRate: 10
-  cameraSpeedupVelocityThr: 10
   isMoving: 0
   targetPos: {x: 0, y: 0, z: 0}
   distanceX: 0
   distanceY: 0
   deadZoneHalfY: 2
   deadZoneHalfX: 0
-  cameraLockedY: 0
-  cameraLockedX: 0
+  cameraSpeedUpRate: 0.1
 --- !u!114 &85131290
 MonoBehaviour:
   m_ObjectHideFlags: 0

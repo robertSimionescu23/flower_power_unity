@@ -161,7 +161,7 @@ MonoBehaviour:
   dashIsOnCooldown: 0
   wallJumpDuration: 0.1
   isWallJumping: 0
-  wallJumpStrength: {x: 5, y: 5}
+  wallJumpStrength: {x: 7, y: 7}
   wallCheck: {fileID: 1250157001580156626}
   groundCheck: {fileID: 1000311737861508021}
 --- !u!114 &3252268591366321116

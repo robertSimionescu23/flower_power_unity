@@ -23,6 +23,9 @@ public class followPlayer : MonoBehaviour
     //Camera Speed
     public float       cameraSpeed;
     public float       defaultCameraSpeed = 1.5f;
+    public float       maxCameraSpeed     = 20f;
+    public float cameraSpeedUpRate        = 10f;
+    public float cameraSpeedupVelocityThr = 10f;
 
     //Dead Zone parameters
     public bool    isMoving  = false;
@@ -31,7 +34,8 @@ public class followPlayer : MonoBehaviour
     public float   distanceY;
     public float deadZoneHalfY = 2f;
     public float deadZoneHalfX;
-    public float cameraSpeedUpRate = 0.1f;
+    public bool cameraLockedY = false;
+    public bool cameraLockedX = false;
 
 
 
@@ -67,6 +71,10 @@ public class followPlayer : MonoBehaviour
 
         cameraBounds = new Bounds();
         cameraBounds.SetMinMax(cameraMinBound, cameraMaxBound);
+
+        cameraLockedX = cameraBounds.extents.x < 0;
+        cameraLockedY = cameraBounds.extents.y < 0;
+
     }
 
     //Make sure camera does not show parts that are not in the level, outer bounds
@@ -85,7 +93,6 @@ public class followPlayer : MonoBehaviour
 
             z = transform.position.z //Z is constant
         };
-
         return newPos;
     }
 
@@ -95,8 +102,8 @@ public class followPlayer : MonoBehaviour
         if (isMoving)
         {
             if(
-                distanceX < 0.1f &&
-                distanceY < 0.1f
+                (distanceX < 0.1f || cameraLockedX) &&
+                (distanceY < 0.1f || cameraLockedY)
             ){
                 isMoving = false;
             }
@@ -104,8 +111,9 @@ public class followPlayer : MonoBehaviour
         else
         {
             if(
-                distanceX > deadZoneHalfX ||
-                distanceY > deadZoneHalfY
+                (distanceX > deadZoneHalfX && !cameraLockedX)
+                ||
+                (distanceY > deadZoneHalfY && !cameraLockedY)
             ){
                 Debug.Log("IsMoving");
                 isMoving = true;
@@ -117,9 +125,10 @@ public class followPlayer : MonoBehaviour
     void UpdateCameraSpeedToPlayerSpeed()
     {
         //TODO: make "5" a variable
-        if(Mathf.Abs(playerVelocityX) > 5f || Mathf.Abs(playerVelocityY) > 5f)
+        if(Mathf.Abs(playerVelocityX) > cameraSpeedupVelocityThr || Mathf.Abs(playerVelocityY) > cameraSpeedupVelocityThr)
         {
-            cameraSpeed += cameraSpeedUpRate * Time.deltaTime;
+            if(cameraSpeed < maxCameraSpeed)
+                cameraSpeed += cameraSpeedUpRate * Time.deltaTime;
         }
         else
         {
@@ -133,11 +142,10 @@ public class followPlayer : MonoBehaviour
             }
         }
     }
-    void LateUpdate()
+    void Update()
     {
         playerPos = player.transform.position;
 
-        //TODO: Make this cleaner
         playerVelocityY = player.GetComponent<Rigidbody2D>().linearVelocityY;
         playerVelocityX = player.GetComponent<Rigidbody2D>().linearVelocityX;
 
@@ -147,9 +155,16 @@ public class followPlayer : MonoBehaviour
         distanceX = Math.Abs(playerPos.x - transform.position.x);
         distanceY = Math.Abs(playerPos.y - transform.position.y);
 
+        UpdateCameraSpeedToPlayerSpeed();
+    }
+    void LateUpdate()
+    {
+        //TODO: Make this cleaner
+
+
         EnforceDeadZone(distanceX, distanceY);
 
-        UpdateCameraSpeedToPlayerSpeed();
+
         if(isMoving)
             transform.position = Vector3.Lerp(transform.position,
                                               targetPos,
