@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 public class PlayerCharacter : MonoBehaviour
 {
@@ -12,6 +11,9 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private InputActionReference move;
     [SerializeField] private LayerMask GroundLayer;
     [SerializeField] private Logic logic;
+    public bool jumpDebug = false;
+    public GameObject jumpDebugMarker;
+
 
     //Gravity
     public float gravityScale = 1f;
@@ -153,6 +155,7 @@ public class PlayerCharacter : MonoBehaviour
         logic.RespawnCurrCheckpoint();
     }
 
+    [ContextMenu("replenish dashes and jump")]
     public void ReplenishDashesAndJumps()
     {
         if(isGrounded){
@@ -162,6 +165,18 @@ public class PlayerCharacter : MonoBehaviour
 
     }
 
+    [ContextMenu("Remove Jump Debug Markers")]
+    public void RemoveJumpDebugMarkers()
+    {
+        Scene scene = gameObject.scene;
+
+        foreach (GameObject inScene in scene.GetRootGameObjects())
+        {
+            if (inScene.CompareTag("JumpDebugMarker")){
+                Destroy(inScene.gameObject);
+            }
+        }
+    }
 
     //------------------------------------------------------------------------//
     //                      WALL JUMPING MECHANICS
@@ -261,13 +276,23 @@ public class PlayerCharacter : MonoBehaviour
         {
             if ((isGrounded || (currNumJumps > 0)) && !isWallSliding)
             {
-                rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpStrength);
+                rb.linearVelocity = new Vector2(0, jumpStrength);
                 currNumJumps --;
+                if (jumpDebug)
+                {
+                    Instantiate(jumpDebugMarker, transform.GetChild(1).position, transform.rotation);
+                    Debug.Log("Jump");
+                }
             }
             if(!isGrounded && isWallSliding)
             {
                 int wallJumpDirection = isFacingRight?-1:1;
                 WallJump(wallJumpDirection);
+                if (jumpDebug)
+                {
+                    Instantiate(jumpDebugMarker, transform.GetChild(1).position, transform.rotation);
+                    Debug.Log("Jump");
+                }
             }
         }
 
@@ -304,5 +329,7 @@ public class PlayerCharacter : MonoBehaviour
             logic.ChangeRoom(door.destinationRoom, door);
         }
     }
+
+
 
 }
