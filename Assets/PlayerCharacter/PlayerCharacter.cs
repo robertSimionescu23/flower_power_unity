@@ -57,6 +57,10 @@ public class PlayerCharacter : MonoBehaviour
     public Transform wallCheck;
     public Transform groundCheck;
 
+    //Coyote Time
+    public float coyoteTime = 0.2f;
+    public float coyoteTimeCurrTimer;
+
 
     //Movement Block
     public bool movementBlocked = false;
@@ -78,6 +82,7 @@ public class PlayerCharacter : MonoBehaviour
         SlowDownXAfterDash();
         TurnOffGravity(isDashing);
         ReplenishDashesAndJumps();
+        CoyoteTimeCheck();
     }
 
 
@@ -274,7 +279,7 @@ public class PlayerCharacter : MonoBehaviour
     {
         if (context.performed)
         {
-            if ((isGrounded || (currNumJumps > 0)) && !isWallSliding)
+            if ((coyoteTimeCurrTimer > 0 || (currNumJumps > 0)) && !isWallSliding)
             {
                 rb.linearVelocity = new Vector2(0, jumpStrength);
                 currNumJumps --;
@@ -300,6 +305,25 @@ public class PlayerCharacter : MonoBehaviour
         if (context.canceled && !isWallSliding)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);
+        }
+        //Cut down coyote time when letting go of key
+        else if(context.canceled)
+            coyoteTimeCurrTimer = 0;
+    }
+
+
+    //------------------------------------------------------------------------//
+    //                      COYOTE TIME
+    //------------------------------------------------------------------------//
+    public void CoyoteTimeCheck()
+    {
+        if(isGrounded)
+        {
+            coyoteTimeCurrTimer = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCurrTimer -= Time.deltaTime;
         }
     }
 
