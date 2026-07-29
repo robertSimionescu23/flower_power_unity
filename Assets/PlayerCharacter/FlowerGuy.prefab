@@ -146,18 +146,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   logic: {fileID: 0}
-  jumpDebug: 1
-  jumpDebugMarker: {fileID: 5386571252664440715, guid: 71c1dd31353f38b98b3bd587b267d832, type: 3}
   gravityScale: 3
   isWallSliding: 0
   wallSlidingSpeed: 2
   moveDirection: 0
   isGrounded: 0
   moveSpeed: 5
+  jumpDebug: 1
+  bufferedJumpDebug: 0
+  debugMarkerParentGameObject: {fileID: 8018712273321461838, guid: 28101257efd3f6765af5b3b78b0bd26b, type: 3}
   jumpStrength: 10
-  maxJumps: 3
+  maxJumps: 0
+  jumpDebugMarker: {fileID: 5386571252664440715, guid: 71c1dd31353f38b98b3bd587b267d832, type: 3}
+  isWithinJumpMargin: 0
+  jumpMargin: 0.2
   dashStrength: 20
-  maxDashes: 1
+  maxDashes: 0
   dashCooldown: 0.5
   dashDuration: 0.1
   dashIsOnCooldown: 0
@@ -169,6 +173,8 @@ MonoBehaviour:
   wallJumpDuration: 0.1
   wallCheck: {fileID: 1250157001580156626}
   groundCheck: {fileID: 1000311737861508021}
+  coyoteTime: 0.2
+  coyoteTimeCurrTimer: 0
   movementBlocked: 0
 --- !u!114 &3252268591366321116
 MonoBehaviour:

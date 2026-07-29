@@ -11,8 +11,7 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private InputActionReference move;
     [SerializeField] private LayerMask GroundLayer;
     [SerializeField] private Logic logic;
-    public bool jumpDebug = false;
-    public GameObject jumpDebugMarker;
+
 
 
     //Gravity
@@ -30,11 +29,19 @@ public class PlayerCharacter : MonoBehaviour
     public  bool isGrounded     = true;
     public float moveSpeed      = 5f;
 
+    //Debugging
+    public bool jumpDebug         = false;
+    public bool bufferedJumpDebug = false;
+    private Transform debugMarkerParentContainer;
+    public GameObject debugMarkerParentGameObject;
 
     //Jumping
     public float jumpStrength   = 10f;
     public int   maxJumps     = 3;
     private int  currNumJumps;
+    public GameObject jumpDebugMarker;
+    private bool isWithinJumpMargin;
+    public float jumpMargin = 0.2f;
 
     //Dashing
     public float dashStrength   = 12f;
@@ -77,12 +84,13 @@ public class PlayerCharacter : MonoBehaviour
         isGrounded    = CheckGrounded();
         isWallSliding = CheckOnWall();
 
-        Move();
-        WallSlide();
-        SlowDownXAfterDash();
-        TurnOffGravity(isDashing);
-        ReplenishDashesAndJumps();
-        CoyoteTimeCheck();
+        Move                    ();
+        WallSlide               ();
+        SlowDownXAfterDash      ();
+        TurnOffGravityIf        (isDashing);
+        ReplenishDashesAndJumps ();
+        CoyoteTimeCheck         ();
+        JumpBuffering           ();
     }
 
 
@@ -255,7 +263,7 @@ public class PlayerCharacter : MonoBehaviour
         }
     }
 
-    private void TurnOffGravity(bool isOff)
+    private void TurnOffGravityIf(bool isOff)
     {
         if(isOff)
             rb.gravityScale = 0;
@@ -279,23 +287,35 @@ public class PlayerCharacter : MonoBehaviour
     {
         if (context.performed)
         {
-            if ((coyoteTimeCurrTimer > 0 || (currNumJumps > 0)) && !isWallSliding)
+            if(!isGrounded && !isWallSliding)
+                isWithinJumpMargin = Physics2D.Raycast(transform.GetChild(1).position, Vector2.down, jumpMargin, GroundLayer);
+            else if ((coyoteTimeCurrTimer > 0 || (currNumJumps > 0)) && !isWallSliding)
             {
                 rb.linearVelocity = new Vector2(0, jumpStrength);
                 currNumJumps --;
                 if (jumpDebug)
                 {
-                    Instantiate(jumpDebugMarker, transform.GetChild(1).position, transform.rotation);
+                    if (!GameObject.FindGameObjectWithTag("JumpDebugMarker"))
+                    {
+                        debugMarkerParentContainer = Instantiate(debugMarkerParentGameObject).transform;
+                    }
+                    Instantiate(jumpDebugMarker, transform.GetChild(1).position,
+                                                       transform.rotation, debugMarkerParentContainer);
                     Debug.Log("Jump");
                 }
             }
-            if(!isGrounded && isWallSliding)
+            else if(!isGrounded && isWallSliding)
             {
                 int wallJumpDirection = isFacingRight?-1:1;
                 WallJump(wallJumpDirection);
                 if (jumpDebug)
                 {
-                    Instantiate(jumpDebugMarker, transform.GetChild(1).position, transform.rotation);
+                    if (!GameObject.FindGameObjectWithTag("JumpDebugMarker"))
+                    {
+                        debugMarkerParentContainer = Instantiate(debugMarkerParentGameObject).transform;
+                    }
+                    Instantiate(jumpDebugMarker, transform.GetChild(1).position,
+                                                       transform.rotation, debugMarkerParentContainer);
                     Debug.Log("Jump");
                 }
             }
@@ -307,7 +327,7 @@ public class PlayerCharacter : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);
         }
         //Cut down coyote time when letting go of key
-        else if(context.canceled)
+        if(context.canceled)
             coyoteTimeCurrTimer = 0;
     }
 
@@ -327,7 +347,32 @@ public class PlayerCharacter : MonoBehaviour
         }
     }
 
+    //------------------------------------------------------------------------//
+    //                      COLLISION MECHANICS
+    //------------------------------------------------------------------------//
+    public void JumpBuffering()
+    {
+        if (isGrounded)
+        {
+            if(isWithinJumpMargin)
+            {
+                rb.linearVelocity = new Vector2(0, jumpStrength);
+                if (bufferedJumpDebug)
+                {
+                    if (!GameObject.FindGameObjectWithTag("JumpDebugMarker"))
+                    {
+                        debugMarkerParentContainer = Instantiate(debugMarkerParentGameObject).transform;
+                    }
+                    GameObject newMarker = Instantiate(jumpDebugMarker, transform.GetChild(1).position,
+                                                       transform.rotation, debugMarkerParentContainer);
+                    newMarker.GetComponent<SpriteRenderer>().color = Color.red;
+                    Debug.Log("Buffered Jump");
+                }
 
+                isWithinJumpMargin = false;
+            }
+        }
+    }
     //------------------------------------------------------------------------//
     //                      COLLISION MECHANICS
     //------------------------------------------------------------------------//
