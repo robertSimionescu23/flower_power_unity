@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 public class PlayerCharacter : MonoBehaviour
 {
@@ -29,17 +30,10 @@ public class PlayerCharacter : MonoBehaviour
     public  bool isGrounded     = true;
     public float moveSpeed      = 5f;
 
-    //Debugging
-    public bool jumpDebug         = false;
-    public bool bufferedJumpDebug = false;
-    private Transform debugMarkerParentContainer;
-    public GameObject debugMarkerParentGameObject;
-
     //Jumping
     public float jumpStrength   = 10f;
     public int   maxJumps     = 3;
     private int  currNumJumps;
-    public GameObject jumpDebugMarker;
     private bool isWithinJumpMargin;
     public float jumpMargin = 0.2f;
 
@@ -72,6 +66,18 @@ public class PlayerCharacter : MonoBehaviour
     //Movement Block
     public bool movementBlocked = false;
 
+
+    //Debugging
+    public bool debugJump         = false;
+    public bool debugBufferedJump = false;
+    public bool debugJumpHeightFlag = false;
+    private Transform debugMarkerParentContainer;
+    public GameObject debugMarkerParentGameObject;
+    public bool DebugFlagIsJumping = false;
+    public bool DebugFlagIsFalling = false;
+    private Vector3 debugJumpStartPosition;
+    public GameObject debugJumpMarker;
+
     public void Start()
     {
         logic            = GameObject.FindGameObjectWithTag("Logic").GetComponent<Logic>();
@@ -91,6 +97,7 @@ public class PlayerCharacter : MonoBehaviour
         ReplenishDashesAndJumps ();
         CoyoteTimeCheck         ();
         JumpBuffering           ();
+        DebugJumpHeight         ();
     }
 
 
@@ -179,13 +186,13 @@ public class PlayerCharacter : MonoBehaviour
     }
 
     [ContextMenu("Remove Jump Debug Markers")]
-    public void RemoveJumpDebugMarkers()
+    public void RemovedebugJumpMarkers()
     {
         Scene scene = gameObject.scene;
 
         foreach (GameObject inScene in scene.GetRootGameObjects())
         {
-            if (inScene.CompareTag("JumpDebugMarker")){
+            if (inScene.CompareTag("DebugJumpMarker")){
                 Destroy(inScene.gameObject);
             }
         }
@@ -282,7 +289,41 @@ public class PlayerCharacter : MonoBehaviour
     //------------------------------------------------------------------------//
     //                      JUMP MECHANICS
     //------------------------------------------------------------------------//
+    public void DebugJumpPlaceMarker(Color markerColor)
+    {
+        if (!GameObject.FindGameObjectWithTag("DebugJumpMarker"))
+        {
+            debugMarkerParentContainer = Instantiate(debugMarkerParentGameObject).transform;
+        }
+        GameObject newMarker = Instantiate(debugJumpMarker, transform.GetChild(1).position,
+                                           transform.rotation, debugMarkerParentContainer);
+        newMarker.GetComponent<SpriteRenderer>().color = markerColor;
+    }
 
+
+    //TODO:Make a function to determine jump height and duration.
+    public void DebugJumpHeight()
+    {
+        if (debugJumpHeightFlag)
+        {
+            if(DebugFlagIsJumping && rb.linearVelocityY < 0)
+            {
+                DebugFlagIsJumping = false;
+                DebugFlagIsFalling = true;
+                float jumpHeight = transform.position.y - debugJumpStartPosition.y;
+                Debug.Log("Jump height was " + jumpHeight +" units!");
+                DebugJumpPlaceMarker(Color.yellow);
+            }
+            if(DebugFlagIsFalling && isGrounded)
+            {
+                DebugFlagIsFalling = false;
+                DebugFlagIsJumping = false;
+                float jumpLength = Math.Abs(debugJumpStartPosition.x - transform.position.x);
+                Debug.Log("Jump length was " + jumpLength +" units!");
+                DebugJumpPlaceMarker(Color.green);
+            }
+        }
+    }
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -293,31 +334,20 @@ public class PlayerCharacter : MonoBehaviour
             {
                 rb.linearVelocity = new Vector2(0, jumpStrength);
                 currNumJumps --;
-                if (jumpDebug)
-                {
-                    if (!GameObject.FindGameObjectWithTag("JumpDebugMarker"))
-                    {
-                        debugMarkerParentContainer = Instantiate(debugMarkerParentGameObject).transform;
-                    }
-                    Instantiate(jumpDebugMarker, transform.GetChild(1).position,
-                                                       transform.rotation, debugMarkerParentContainer);
-                    Debug.Log("Jump");
-                }
+                if (debugJump)
+                    DebugJumpPlaceMarker(Color.white);
             }
             else if(!isGrounded && isWallSliding)
             {
                 int wallJumpDirection = isFacingRight?-1:1;
                 WallJump(wallJumpDirection);
-                if (jumpDebug)
-                {
-                    if (!GameObject.FindGameObjectWithTag("JumpDebugMarker"))
-                    {
-                        debugMarkerParentContainer = Instantiate(debugMarkerParentGameObject).transform;
-                    }
-                    Instantiate(jumpDebugMarker, transform.GetChild(1).position,
-                                                       transform.rotation, debugMarkerParentContainer);
-                    Debug.Log("Jump");
-                }
+                if (debugJump)
+                    DebugJumpPlaceMarker(Color.white);
+            }
+            if (debugJumpHeightFlag)
+            {
+                DebugFlagIsJumping = true;
+                debugJumpStartPosition = transform.GetChild(1).position; //Shortcut for getting position of feet
             }
         }
 
@@ -357,16 +387,9 @@ public class PlayerCharacter : MonoBehaviour
             if(isWithinJumpMargin)
             {
                 rb.linearVelocity = new Vector2(0, jumpStrength);
-                if (bufferedJumpDebug)
+                if (debugBufferedJump)
                 {
-                    if (!GameObject.FindGameObjectWithTag("JumpDebugMarker"))
-                    {
-                        debugMarkerParentContainer = Instantiate(debugMarkerParentGameObject).transform;
-                    }
-                    GameObject newMarker = Instantiate(jumpDebugMarker, transform.GetChild(1).position,
-                                                       transform.rotation, debugMarkerParentContainer);
-                    newMarker.GetComponent<SpriteRenderer>().color = Color.red;
-                    Debug.Log("Buffered Jump");
+                   DebugJumpPlaceMarker(Color.red);
                 }
 
                 isWithinJumpMargin = false;
