@@ -9,6 +9,8 @@ TagManager:
   - Logic
   - NextRoom
   - Checkpoint
+  - DebugJumpMarker
+  - JumpDebugMarker
   layers:
   - Default
   - TransparentFX

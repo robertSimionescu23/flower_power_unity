@@ -146,20 +146,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   logic: {fileID: 0}
+  colliderComponent: {fileID: 4197415275001376819}
   gravityScale: 3
   isWallSliding: 0
   wallSlidingSpeed: 2
   moveDirection: 0
   isGrounded: 0
   moveSpeed: 5
-  debugJump: 0
-  bufferedJumpDebug: 0
-  debugMarkerParentGameObject: {fileID: 8018712273321461838, guid: 28101257efd3f6765af5b3b78b0bd26b, type: 3}
-  isJumpingDebugFlag: 0
   jumpStrength: 10
   maxJumps: 0
-  debugJumpMarker: {fileID: 5386571252664440715, guid: 71c1dd31353f38b98b3bd587b267d832, type: 3}
-  jumpMargin: 0.2
+  jumpMargin: 0.3
   dashStrength: 20
   maxDashes: 0
   dashCooldown: 0.5
@@ -175,8 +171,14 @@ MonoBehaviour:
   groundCheck: {fileID: 1000311737861508021}
   coyoteTime: 0.2
   coyoteTimeCurrTimer: 0
-  debugJumpHeightFlag: 0
   movementBlocked: 0
+  debugJump: 0
+  debugBufferedJump: 0
+  debugJumpHeightFlag: 0
+  debugMarkerParentGameObject: {fileID: 8018712273321461838, guid: 28101257efd3f6765af5b3b78b0bd26b, type: 3}
+  DebugFlagIsJumping: 0
+  DebugFlagIsFalling: 0
+  debugJumpMarker: {fileID: 5386571252664440715, guid: 71c1dd31353f38b98b3bd587b267d832, type: 3}
 --- !u!114 &3252268591366321116
 MonoBehaviour:
   m_ObjectHideFlags: 0

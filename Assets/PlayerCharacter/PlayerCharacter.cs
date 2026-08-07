@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
+using UnityEditor.ShaderGraph;
 
 public class PlayerCharacter : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private InputActionReference move;
     [SerializeField] private LayerMask GroundLayer;
     [SerializeField] private Logic logic;
+    [SerializeField] private BoxCollider2D colliderComponent;
 
 
 
@@ -77,6 +79,8 @@ public class PlayerCharacter : MonoBehaviour
     public bool DebugFlagIsFalling = false;
     private Vector3 debugJumpStartPosition;
     public GameObject debugJumpMarker;
+    public bool debugHitbox = false;
+    private GameObject debugHitboxObject;
 
     public void Start()
     {
@@ -97,7 +101,8 @@ public class PlayerCharacter : MonoBehaviour
         ReplenishDashesAndJumps ();
         CoyoteTimeCheck         ();
         JumpBuffering           ();
-        DebugJumpHeight         ();
+        if (debugJumpHeightFlag)
+            DebugJumpHeight();
     }
 
 
@@ -105,9 +110,9 @@ public class PlayerCharacter : MonoBehaviour
     //TODO: Handle Airborne movement better
     public void Move()
     {
+        moveDirection = move.action.ReadValue<float>();
         Vector2 targetMovementVelocity = new Vector2(moveDirection * moveSpeed, rb.linearVelocityY);
         FlipHorizontal();
-        moveDirection = move.action.ReadValue<float>();
         if(!movementBlocked && isGrounded)
             rb.linearVelocity = targetMovementVelocity;
         else if(!movementBlocked && !isGrounded)
@@ -162,12 +167,10 @@ public class PlayerCharacter : MonoBehaviour
         action?.Invoke();
     }
 
-
     public void BlockMovement(float duration)
     {
         StartCoroutine(SetFlagTrueForDuration(value => movementBlocked = value, duration));
     }
-
 
     [ContextMenu("respawn")]
     public void RespawnCurrCheckpoint()
@@ -183,6 +186,39 @@ public class PlayerCharacter : MonoBehaviour
             currNumJumps  = maxJumps;
         }
 
+    }
+
+    [ContextMenu("Toggle Debug Hitbox")]
+    public void AddDebugHitbox(){
+        debugHitbox = !debugHitbox;
+
+    if (debugHitbox)
+    {
+        debugHitboxObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+        // Remove physics
+        Destroy(debugHitboxObject.GetComponent<BoxCollider>());
+
+        // Parent to player
+        debugHitboxObject.transform.SetParent(transform);
+
+        // Match collider
+        debugHitboxObject.transform.localPosition = colliderComponent.offset;
+        debugHitboxObject.transform.localScale = colliderComponent.size;
+
+        // Make it transparent
+        Material mat = new Material(Shader.Find("Sprites/Default"));
+        mat.color = new Color(1, 0, 0, 0.3f);
+
+        debugHitboxObject.GetComponent<MeshRenderer>().material = mat;
+    }
+    else
+    {
+        if (debugHitboxObject != null)
+        {
+            Destroy(debugHitboxObject);
+        }
+    }
     }
 
     [ContextMenu("Remove Jump Debug Markers")]
@@ -304,26 +340,23 @@ public class PlayerCharacter : MonoBehaviour
     //TODO:Make a function to determine jump height and duration.
     public void DebugJumpHeight()
     {
-        if (debugJumpHeightFlag)
+        if(DebugFlagIsJumping && rb.linearVelocityY < 0)
         {
-            if(DebugFlagIsJumping && rb.linearVelocityY < 0)
-            {
-                DebugFlagIsJumping = false;
-                DebugFlagIsFalling = true;
-                float jumpHeight = transform.position.y - debugJumpStartPosition.y;
-                Debug.Log("Jump height was " + jumpHeight +" units!");
-                DebugJumpPlaceMarker(Color.yellow);
-            }
-            if(DebugFlagIsFalling && isGrounded)
-            {
-                DebugFlagIsFalling = false;
-                DebugFlagIsJumping = false;
-                float jumpLength = Math.Abs(debugJumpStartPosition.x - transform.position.x);
-                Debug.Log("Jump length was " + jumpLength +" units!");
-                DebugJumpPlaceMarker(Color.green);
-            }
+            DebugFlagIsJumping = false;
+            DebugFlagIsFalling = true;
+            float jumpHeight = transform.position.y - debugJumpStartPosition.y;
+            Debug.Log("Jump height was " + jumpHeight +" units!");
+            DebugJumpPlaceMarker(Color.yellow);
         }
-    }
+        else if(DebugFlagIsFalling && isGrounded)
+        {
+            DebugFlagIsFalling = false;
+            DebugFlagIsJumping = false;
+            float jumpLength = Math.Abs(debugJumpStartPosition.x - transform.position.x);
+            Debug.Log("Jump length was " + jumpLength +" units!");
+            DebugJumpPlaceMarker(Color.green);
+        }
+}
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed)
