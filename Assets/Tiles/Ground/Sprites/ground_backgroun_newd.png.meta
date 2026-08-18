@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6202bd46f1e136691aa538e2569477d0
+guid: 867c9650787e73e05b31a361defe9222
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -739581812501672312
-    second: Rocks_new_0
+      213: -1089261739468226984
+    second: ground_backgroun_newd_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,117 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rocks_new_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 979756a686f77c7a68db60f0ce78fc50
-      internalID: 425297473
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rocks_new_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d9890244e439088d59be452e490eddb9
-      internalID: 136591296
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rocks_new_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 207697bd0c58fb701acc0f24b2d5d563
-      internalID: -1529671785
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rocks_new_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 59d6c06211d766dd897373910d58f55c
-      internalID: 542260339
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rocks_new_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b283a7080c35a1e6ca0233ecf3d4b77f
-      internalID: -1364754724
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rocks_new_5
+      name: ground_backgroun_newd_0
       rect:
         serializedVersion: 2
         x: 0
@@ -238,14 +128,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b988196aadb49aa13aa3ccd40d493f06
-      internalID: -1720724622
+      spriteID: 2ddfe0fbcf12c5cd6aa9dc7bf68912f9
+      internalID: -1005477129
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks_new_6
+      name: ground_backgroun_newd_1
       rect:
         serializedVersion: 2
         x: 16
@@ -260,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50d1c0a45087baa11924c963685053ac
-      internalID: 1402079493
+      spriteID: 436090758ee976a68a124a1b31535d22
+      internalID: 700105463
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks_new_7
+      name: ground_backgroun_newd_2
       rect:
         serializedVersion: 2
         x: 32
@@ -282,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0fdcbf0eabae1d1ab9cbd8579de96f71
-      internalID: 379548909
+      spriteID: bdfa2fd3356e43b6cb32d0bf32cebf07
+      internalID: 1841861187
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks_new_8
+      name: ground_backgroun_newd_3
       rect:
         serializedVersion: 2
         x: 48
@@ -304,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a954c59213ef6f700b1f58f1f04a62cb
-      internalID: 1964302638
+      spriteID: 0991fd8d6aa75141b99a5968e17d0a92
+      internalID: -992341441
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks_new_9
+      name: ground_backgroun_newd_4
       rect:
         serializedVersion: 2
         x: 64
@@ -326,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4865d9770392a27c49e4417f5ea8b9e7
-      internalID: -541780105
+      spriteID: 32853990df3dce6ba896a1d90d54d22b
+      internalID: 2106234184
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks_new_10
+      name: ground_backgroun_newd_5
       rect:
         serializedVersion: 2
         x: 0
@@ -348,14 +238,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cadf23e83c0ad579be8de023e4e3828
-      internalID: 1520872185
+      spriteID: 6f14ce12d0d0f41f79a715fb8abaa876
+      internalID: 767582056
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks_new_11
+      name: ground_backgroun_newd_6
       rect:
         serializedVersion: 2
         x: 16
@@ -370,14 +260,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d87f7ef158389fab5aa4d26fffc041b6
-      internalID: -192196702
+      spriteID: e55ba2423b3f48da697a33993f886dba
+      internalID: -1735393336
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks_new_12
+      name: ground_backgroun_newd_7
       rect:
         serializedVersion: 2
         x: 32
@@ -392,14 +282,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f85cf6b4cc28cfd34bb9c11ac1804aa6
-      internalID: 292873720
+      spriteID: 298572ade0134b059932fb45de8a13b4
+      internalID: -1146468540
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks_new_13
+      name: ground_backgroun_newd_8
       rect:
         serializedVersion: 2
         x: 48
@@ -414,14 +304,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7bf2df5ea8f1e68db61163c5e20fc98
-      internalID: -732386644
+      spriteID: 1da823ba8f2effa5591a1f7f60901413
+      internalID: 2043034658
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks_new_14
+      name: ground_backgroun_newd_9
       rect:
         serializedVersion: 2
         x: 64
@@ -436,14 +326,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d813e014a8593a8cd90aab305a25392f
-      internalID: -193885653
+      spriteID: df96a1e04e2a75ba29142d1d75b62e8e
+      internalID: 1847736280
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks_new_15
+      name: ground_backgroun_newd_10
       rect:
         serializedVersion: 2
         x: 0
@@ -458,14 +348,36 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3279122c8254af612a5b690cf61d8f8a
-      internalID: 1649888654
+      spriteID: 732aa653cf66c33289b67a0688c04eb9
+      internalID: -297905345
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks_new_16
+      name: ground_backgroun_newd_11
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9de7ffbfcdce43b398fb0906fdf7babd
+      internalID: 359653315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground_backgroun_newd_12
       rect:
         serializedVersion: 2
         x: 32
@@ -480,14 +392,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd3dea6642909b2a4b387f7dc434ae9b
-      internalID: -458200476
+      spriteID: 5cbd2abd16e9c6742b901e2a67fc4322
+      internalID: 187593436
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks_new_17
+      name: ground_backgroun_newd_13
       rect:
         serializedVersion: 2
         x: 48
@@ -502,14 +414,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e975ac9aaab9053c79c47d8a2ea8cc34
-      internalID: -394098255
+      spriteID: 604458fe100593ccdaa793663a642f2e
+      internalID: -2021725451
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks_new_18
+      name: ground_backgroun_newd_14
       rect:
         serializedVersion: 2
         x: 64
@@ -524,14 +436,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a35148bbc20b8ff99a5a2de486469ac
-      internalID: -1704043592
+      spriteID: f8b8297242e6d212eb29a6c8e0a1ddcf
+      internalID: 307798607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocks_new_19
+      name: ground_backgroun_newd_15
       rect:
         serializedVersion: 2
         x: 0
@@ -546,8 +458,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 730c8f879b802cfda8975806871bf581
-      internalID: 123842488
+      spriteID: 9e830af477326b50d98b79ddb04ce89c
+      internalID: 1688411760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground_backgroun_newd_16
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aac7a78bbceeb3318bef8357a3de9ce
+      internalID: -1949984434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground_backgroun_newd_17
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54ee5d5507b0ac19baf233db100da27a
+      internalID: -2093728097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground_backgroun_newd_18
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 765a77d5234b72c9aac9f48baf9f4194
+      internalID: 1705514025
       vertices: []
       indices: 
       edges: []
@@ -556,8 +534,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0a6316e60ef5b851da550e94404d057b
-    internalID: 1003457549
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -566,30 +544,27 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":true,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":1,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
-      - key: SpriteEditor.SliceOnImport
-        value: True
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Rocks_new_0: 425297473
-      Rocks_new_1: 136591296
-      Rocks_new_10: 1520872185
-      Rocks_new_11: -192196702
-      Rocks_new_12: 292873720
-      Rocks_new_13: -732386644
-      Rocks_new_14: -193885653
-      Rocks_new_15: 1649888654
-      Rocks_new_16: -458200476
-      Rocks_new_17: -394098255
-      Rocks_new_18: -1704043592
-      Rocks_new_19: 123842488
-      Rocks_new_2: -1529671785
-      Rocks_new_3: 542260339
-      Rocks_new_4: -1364754724
-      Rocks_new_5: -1720724622
-      Rocks_new_6: 1402079493
-      Rocks_new_7: 379548909
-      Rocks_new_8: 1964302638
-      Rocks_new_9: -541780105
+      ground_backgroun_newd_0: -1005477129
+      ground_backgroun_newd_1: 700105463
+      ground_backgroun_newd_10: -297905345
+      ground_backgroun_newd_11: 359653315
+      ground_backgroun_newd_12: 187593436
+      ground_backgroun_newd_13: -2021725451
+      ground_backgroun_newd_14: 307798607
+      ground_backgroun_newd_15: 1688411760
+      ground_backgroun_newd_16: -1949984434
+      ground_backgroun_newd_17: -2093728097
+      ground_backgroun_newd_18: 1705514025
+      ground_backgroun_newd_2: 1841861187
+      ground_backgroun_newd_3: -992341441
+      ground_backgroun_newd_4: 2106234184
+      ground_backgroun_newd_5: 767582056
+      ground_backgroun_newd_6: -1735393336
+      ground_backgroun_newd_7: -1146468540
+      ground_backgroun_newd_8: 2043034658
+      ground_backgroun_newd_9: 1847736280
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

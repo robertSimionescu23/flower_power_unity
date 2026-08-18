@@ -124,7 +124,6 @@ public class followPlayer : MonoBehaviour
     //If the player is moving too fast for the camera, update it's speed based on distance from camera. Take Dead Zone into consideration
     void UpdateCameraSpeedToPlayerSpeed()
     {
-        //TODO: make "5" a variable
         if(Mathf.Abs(playerVelocityX) > cameraSpeedupVelocityThr || Mathf.Abs(playerVelocityY) > cameraSpeedupVelocityThr)
         {
             if(cameraSpeed < maxCameraSpeed)
@@ -159,8 +158,6 @@ public class followPlayer : MonoBehaviour
     }
     void LateUpdate()
     {
-        //TODO: Make this cleaner
-
 
         EnforceDeadZone(distanceX, distanceY);
 

@@ -37,7 +37,7 @@ public class PlayerCharacter : MonoBehaviour
     public int   maxJumps     = 3;
     private int  currNumJumps;
     private bool isWithinJumpMargin;
-    public float jumpMargin = 0.2f;
+    public float jumpMargin = 0.5f;
 
     //Dashing
     public float dashStrength   = 12f;
@@ -101,8 +101,7 @@ public class PlayerCharacter : MonoBehaviour
         ReplenishDashesAndJumps ();
         CoyoteTimeCheck         ();
         JumpBuffering           ();
-        if (debugJumpHeightFlag)
-            DebugJumpHeight();
+        DebugJumpHeight(debugJumpHeightFlag);
     }
 
 
@@ -123,12 +122,12 @@ public class PlayerCharacter : MonoBehaviour
 
     private void FlipHorizontal()
     {
-        if (rb.linearVelocityX > 0.01f)
+        if (rb.linearVelocityX > 0.01f && !isFacingRight)
         {
             transform.localRotation = Quaternion.Euler(0, 0, 0);
             isFacingRight = true;
         }
-        else if (rb.linearVelocityX < -0.01f)
+        else if (rb.linearVelocityX < -0.01f && isFacingRight)
         {
             transform.localRotation = Quaternion.Euler(0, 180, 0);
             isFacingRight = false;
@@ -228,8 +227,8 @@ public class PlayerCharacter : MonoBehaviour
 
         foreach (GameObject inScene in scene.GetRootGameObjects())
         {
-            if (inScene.CompareTag("DebugJumpMarker")){
-                Destroy(inScene.gameObject);
+            if (inScene.CompareTag("JumpDebugMarker")){
+                Destroy(inScene);
             }
         }
     }
@@ -327,7 +326,7 @@ public class PlayerCharacter : MonoBehaviour
     //------------------------------------------------------------------------//
     public void DebugJumpPlaceMarker(Color markerColor)
     {
-        if (!GameObject.FindGameObjectWithTag("DebugJumpMarker"))
+        if (!GameObject.FindGameObjectWithTag("JumpDebugMarker"))
         {
             debugMarkerParentContainer = Instantiate(debugMarkerParentGameObject).transform;
         }
@@ -337,26 +336,33 @@ public class PlayerCharacter : MonoBehaviour
     }
 
 
-    //TODO:Make a function to determine jump height and duration.
-    public void DebugJumpHeight()
+    //TODO: Investigate perfomance loss on jump from this. - Would a routine fit better?
+    public void DebugJumpHeight(bool debugJumpHeightFlag)
     {
-        if(DebugFlagIsJumping && rb.linearVelocityY < 0)
-        {
-            DebugFlagIsJumping = false;
-            DebugFlagIsFalling = true;
-            float jumpHeight = transform.position.y - debugJumpStartPosition.y;
-            Debug.Log("Jump height was " + jumpHeight +" units!");
-            DebugJumpPlaceMarker(Color.yellow);
+        if(debugJumpHeightFlag){
+            if(DebugFlagIsJumping)
+            {
+                if(rb.linearVelocityY < 0){
+                    DebugFlagIsJumping = false;
+                    DebugFlagIsFalling = true;
+                    float jumpHeight = transform.position.y - debugJumpStartPosition.y;
+                    Debug.Log("Jump height was " + jumpHeight +" units!");
+                    DebugJumpPlaceMarker(Color.yellow);
+                }
+            }
+            else if(DebugFlagIsFalling)
+            {
+                if(isGrounded)
+                {
+                    DebugFlagIsFalling = false;
+                    DebugFlagIsJumping = false;
+                    float jumpLength = Math.Abs(debugJumpStartPosition.x - transform.position.x);
+                    Debug.Log("Jump length was " + jumpLength +" units!");
+                    DebugJumpPlaceMarker(Color.green);
+                }
+            }
         }
-        else if(DebugFlagIsFalling && isGrounded)
-        {
-            DebugFlagIsFalling = false;
-            DebugFlagIsJumping = false;
-            float jumpLength = Math.Abs(debugJumpStartPosition.x - transform.position.x);
-            Debug.Log("Jump length was " + jumpLength +" units!");
-            DebugJumpPlaceMarker(Color.green);
-        }
-}
+    }
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed)

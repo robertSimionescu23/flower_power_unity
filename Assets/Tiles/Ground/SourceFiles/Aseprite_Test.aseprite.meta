@@ -236,15 +236,15 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 100}
   - name: Ground Tilemap_6
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.42857146, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 28
-      y: 4
-      width: 16
+      x: 52
+      y: 172
+      width: 14
       height: 16
     spriteID: 19349bfd96b967fa39f5cfb0d43916b5
     spriteBone: []
@@ -254,7 +254,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 28, y: 4}
+    uvTransform: {x: 50, y: 172}
   - name: Ground Tilemap_7
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -263,8 +263,8 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 28
-      y: 28
+      x: 4
+      y: 124
       width: 16
       height: 16
     spriteID: b76f1de4b11876553aa488cb40d542be
@@ -275,7 +275,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 28, y: 28}
+    uvTransform: {x: 4, y: 124}
   - name: Ground Tilemap_8
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -284,8 +284,8 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 28
-      y: 52
+      x: 4
+      y: 148
       width: 16
       height: 16
     spriteID: 53c078a272f318346acb6adbbea13a47
@@ -296,7 +296,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 28, y: 52}
+    uvTransform: {x: 4, y: 148}
   - name: Ground Tilemap_9
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -305,8 +305,8 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 28
-      y: 76
+      x: 4
+      y: 172
       width: 16
       height: 16
     spriteID: ee657566405256c22abeaa4ae19c2b8c
@@ -317,8 +317,134 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 28, y: 76}
+    uvTransform: {x: 4, y: 172}
   - name: Ground Tilemap_10
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 196
+      width: 16
+      height: 16
+    spriteID: 0c61e84105c56c111b656c2eec9826cb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 196}
+  - name: Ground Tilemap_11
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 220
+      width: 16
+      height: 16
+    spriteID: 490be38df13593bf791ea9b23513e138
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 220}
+  - name: Ground Tilemap_12
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 4
+      width: 16
+      height: 16
+    spriteID: 4bb898ea1d4991f9cbc477368ed71911
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 28, y: 4}
+  - name: Ground Tilemap_13
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 28
+      width: 16
+      height: 16
+    spriteID: 54087a3fcfd3b40a5a1968970cdd263e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 28, y: 28}
+  - name: Ground Tilemap_14
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 52
+      width: 16
+      height: 16
+    spriteID: 14cc80c21e0b555d79c171898ce5e6d6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 28, y: 52}
+  - name: Ground Tilemap_15
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 76
+      width: 16
+      height: 16
+    spriteID: 0edfe67045794cf7f9dc51f5be042904
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 28, y: 76}
+  - name: Ground Tilemap_16
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 9
@@ -330,132 +456,6 @@ ScriptedImporter:
       y: 100
       width: 16
       height: 16
-    spriteID: 0c61e84105c56c111b656c2eec9826cb
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 28, y: 100}
-  - name: Ground Tilemap_11
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 52
-      y: 4
-      width: 16
-      height: 16
-    spriteID: 490be38df13593bf791ea9b23513e138
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 52, y: 4}
-  - name: Ground Tilemap_12
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 52
-      y: 28
-      width: 16
-      height: 16
-    spriteID: 4bb898ea1d4991f9cbc477368ed71911
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 52, y: 28}
-  - name: Ground Tilemap_13
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 52
-      y: 52
-      width: 16
-      height: 16
-    spriteID: 54087a3fcfd3b40a5a1968970cdd263e
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 52, y: 52}
-  - name: Ground Tilemap_14
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 52
-      y: 76
-      width: 16
-      height: 16
-    spriteID: 14cc80c21e0b555d79c171898ce5e6d6
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 52, y: 76}
-  - name: Ground Tilemap_15
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 52
-      y: 100
-      width: 16
-      height: 16
-    spriteID: 0edfe67045794cf7f9dc51f5be042904
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 52, y: 100}
-  - name: Ground Tilemap_16
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 76
-      y: 4
-      width: 16
-      height: 16
     spriteID: 4e433603b8b764b69883cca93a6ab884
     spriteBone: []
     spriteOutline: []
@@ -464,7 +464,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 76, y: 4}
+    uvTransform: {x: 28, y: 100}
   - name: Ground Tilemap_17
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -473,8 +473,8 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 76
-      y: 28
+      x: 28
+      y: 124
       width: 16
       height: 16
     spriteID: 24f766166cac4a93b81b352ccd9a8f7d
@@ -485,7 +485,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 76, y: 28}
+    uvTransform: {x: 28, y: 124}
   - name: Ground Tilemap_18
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -494,8 +494,8 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 76
-      y: 52
+      x: 28
+      y: 148
       width: 16
       height: 16
     spriteID: e00463584985bda9dad7b55c39a9ff7d
@@ -506,7 +506,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 76, y: 52}
+    uvTransform: {x: 28, y: 148}
   - name: Ground Tilemap_19
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -515,8 +515,8 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 76
-      y: 76
+      x: 28
+      y: 172
       width: 16
       height: 16
     spriteID: 2568ef0e12d71a0ad8ac90ebdd4f9059
@@ -527,7 +527,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 76, y: 76}
+    uvTransform: {x: 28, y: 172}
   - name: Ground Tilemap_20
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -536,8 +536,8 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 76
-      y: 100
+      x: 28
+      y: 196
       width: 16
       height: 16
     spriteID: 83c31d18651123a2fbbef9adda34ae00
@@ -548,7 +548,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 76, y: 100}
+    uvTransform: {x: 28, y: 196}
   - name: Ground Tilemap_21
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -557,8 +557,8 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 100
-      y: 4
+      x: 28
+      y: 220
       width: 16
       height: 16
     spriteID: 47f82d8099790d2bfa453379f8a9695c
@@ -569,19 +569,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 100, y: 4}
+    uvTransform: {x: 28, y: 220}
   - name: Ground Tilemap_22
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: -0.14285715}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 100
-      y: 28
+      x: 4
+      y: 244
       width: 16
-      height: 16
+      height: 7
     spriteID: 66403a9549c39ff68a98062698523531
     spriteBone: []
     spriteOutline: []
@@ -590,19 +590,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 100, y: 28}
+    uvTransform: {x: 4, y: 235}
   - name: Ground Tilemap_23
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5714286, y: 0.11111111}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 100
-      y: 52
-      width: 16
-      height: 16
+      x: 52
+      y: 196
+      width: 14
+      height: 9
     spriteID: 1b392925be81924ff82e26297a2e7981
     spriteBone: []
     spriteOutline: []
@@ -611,19 +611,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 100, y: 52}
+    uvTransform: {x: 52, y: 189}
   - name: Ground Tilemap_24
     originalName: 
-    pivot: {x: 0.5, y: -0.14285715}
+    pivot: {x: 0.5, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 100
-      y: 76
+      x: 52
+      y: 4
       width: 16
-      height: 7
+      height: 16
     spriteID: c0ef8505f8f43f775a062a4a74fa402a
     spriteBone: []
     spriteOutline: []
@@ -632,7 +632,175 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 100, y: 67}
+    uvTransform: {x: 52, y: 4}
+  - name: Ground Tilemap_25
+    originalName: 
+    pivot: {x: 0.42857146, y: 0.11111111}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 213
+      width: 14
+      height: 9
+    spriteID: cdac39ac62ce5d15cb1b8462cf79ec84
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 50, y: 206}
+  - name: Ground Tilemap_26
+    originalName: 
+    pivot: {x: 0.5, y: -0.14285715}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 244
+      width: 16
+      height: 7
+    spriteID: 3117f5c126a1512ed8495b180b288fdb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 28, y: 235}
+  - name: Ground Tilemap_27
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 28
+      width: 16
+      height: 16
+    spriteID: b7ff9f89cc792b7e8b3c84da3675b541
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 52, y: 28}
+  - name: Ground Tilemap_28
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 52
+      width: 16
+      height: 16
+    spriteID: 29bfa99fe8de05a5da6746f4e81ae788
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 52, y: 52}
+  - name: Ground Tilemap_29
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 76
+      width: 16
+      height: 16
+    spriteID: 87d9616a9a827fb74aae847129b474a6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 52, y: 76}
+  - name: Ground Tilemap_30
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 100
+      width: 16
+      height: 16
+    spriteID: ff6e8a8732b38dab69ff19aed822adab
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 52, y: 100}
+  - name: Ground Tilemap_31
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 124
+      width: 16
+      height: 16
+    spriteID: 734ba758896800ef18bb80b972c2da0f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 52, y: 124}
+  - name: Ground Tilemap_32
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 148
+      width: 16
+      height: 16
+    spriteID: 0efa078f7b856063383aff42ebe0ae15
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 52, y: 148}
   asepriteLayers:
   - layerIndex: 0
     uuid:
@@ -653,9 +821,9 @@ ScriptedImporter:
       cellRect:
         x: 0
         y: 0
-        width: 7
+        width: 10
         height: 3
-      tileIndices: 010000000200000002000000040000000b0000000e0000001800000003000000050000000a000000060000000c0000000d0000000000000008000000070000000700000009000000000000000000000000000000
+      tileIndices: 1b000000010000000100000003000000090000000c000000160000001d0000001e0000001f000000020000000400000008000000050000000a0000000b0000002000000000000000000000000000000019000000180000001a00000017000000000000000000000000000000000000000000000000000000
     tileSetIndex: 0
     parentIndex: -1
   tileSets:
@@ -809,10 +977,58 @@ ScriptedImporter:
         y: 16
       name: Ground Tilemap_24
       spriteId: c0ef8505f8f43f775a062a4a74fa402a
+    - tileId: 25
+      size:
+        x: 16
+        y: 16
+      name: Ground Tilemap_25
+      spriteId: cdac39ac62ce5d15cb1b8462cf79ec84
+    - tileId: 26
+      size:
+        x: 16
+        y: 16
+      name: Ground Tilemap_26
+      spriteId: 3117f5c126a1512ed8495b180b288fdb
+    - tileId: 27
+      size:
+        x: 16
+        y: 16
+      name: Ground Tilemap_27
+      spriteId: b7ff9f89cc792b7e8b3c84da3675b541
+    - tileId: 28
+      size:
+        x: 16
+        y: 16
+      name: Ground Tilemap_28
+      spriteId: 29bfa99fe8de05a5da6746f4e81ae788
+    - tileId: 29
+      size:
+        x: 16
+        y: 16
+      name: Ground Tilemap_29
+      spriteId: 87d9616a9a827fb74aae847129b474a6
+    - tileId: 30
+      size:
+        x: 16
+        y: 16
+      name: Ground Tilemap_30
+      spriteId: ff6e8a8732b38dab69ff19aed822adab
+    - tileId: 31
+      size:
+        x: 16
+        y: 16
+      name: Ground Tilemap_31
+      spriteId: 734ba758896800ef18bb80b972c2da0f
+    - tileId: 32
+      size:
+        x: 16
+        y: 16
+      name: Ground Tilemap_32
+      spriteId: 0efa078f7b856063383aff42ebe0ae15
     guid: -1616244007
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 160, y: 160}
-  previousTextureSize: {x: 128, y: 128}
+  previousTextureSize: {x: 128, y: 256}
